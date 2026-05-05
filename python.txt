@@ -42,14 +42,12 @@ elif x == z:
 else:
     print("x è maggiore z")
 
-
 #sintassi del for
 for stringa in lista:  
     print(stringa)   #stampa tutte le stringhe della lista
 
 for carattere in s:  
     print(carattere)    #stampa i caratteri della stringa
-
 
 #sintassi del while
 i = 0;
@@ -61,13 +59,11 @@ while (i <= x):
 for x in range(x):
     print(x)    #stampa i numeri nel range da 0 ad x-1
 
-
 #sintassi per le funzioni
-def funzione(var):  #passaggio dei paramenti
+def funzione(var):  
     print(var)
 
 funzione(x)   #esecuzione della funzione, stampa x
-
 
 def funz_p(a, b):  
     prod = a * b
