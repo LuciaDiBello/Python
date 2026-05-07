@@ -1,0 +1,38 @@
+#sintassi per la definizione di una classe in python
+class Persona:
+    def __init__(self, nome, cognome):  #costruttore
+    	self.nome = nome     #inizializzazione dei campi della classe
+    	self.cognome = cognome
+
+    def stampa(self):       #definizione del metodo della classe  
+	    print("ciao, mi chiamo " + self.nome)
+
+#creazione dell'istanza
+persona = Persona("Lucia", "Di Bello")
+
+print(persona.nome)  #stampa il nome della persona
+
+persona.stampa()  #esecuzione del metodo stampa
+
+
+#La classe Insegnante è una classe derivata dalla classe Persona
+class Insegnante(Persona):
+   def __init__(self, nome, cognome, materia): #costruttore della classe Insegnante, hiding dei campi nome e cognome della classe Persona
+         super().__init__(nome, cognome)  #la classe Insegnante deriva i campi nome e cognome dalla classe Persona, (classe super della classe Insegnante)
+         self.materia = materia  #inizializzazione del campo della classe Insegnante
+   
+   def stampa(self):   #overriding del metodo della classe super
+	   print("Salve, sono " + self.nome + " " + self.cognome)
+
+#creazione dell'istanza 
+insegnante = Insegnante("Lucia","Di Bello", "informatica")
+insegnante.stampa()  #esecuzione del metodo della classe Insegnante, overriding del metodo della classe super
+
+print(insegnante.materia)  #stampa la materia 
+
+print(persona.materia)  #segnala un errore dato che la classe Persona non ha il campo materia
+
+
+
+
+
