@@ -1,0 +1,30 @@
+#Definizione di un dictionary in python
+#E'una struttura di dati simile ad una struct, con l'elenco dei campi e dei valori
+
+persona = {
+    "nome": "Lucia",
+    "cognome": "Di Bello"
+      }
+
+print(type(persona))  #stampa il tipo di dato, dict
+
+print(persona["nome"])  #si usano le parentesi quadrate per indicare i campi del dict, stampa il valore del campo
+
+print(persona.values()) #la funzione values indica i valori dei campi del dict
+
+persona["titolo"] = "Laurea"   #è possibile aggiungere un campo al dict
+
+print(persona)  #stampa tutti campi del dict con il loro valore
+
+for x in persona:
+  print(x)  #stampa la denominazione dei campi del dict
+
+for x in persona:   
+  print(persona[x])  #stampa il valore dei campi del dict
+
+for x in persona.values():
+  print(x)  #stampa il valore dei campi del dict
+
+
+
+ 
