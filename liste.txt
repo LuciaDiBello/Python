@@ -1,0 +1,40 @@
+#definizione di una lista, si utilizzano le parentesi quadrate
+x = ["stringa1","stringa2","stringa3","stringa4","stringa5","stringa6","stringa7","stringa8","stringa9"] 
+
+#definizione di una lista mediante la funzione list()
+y = list(("stringa1","stringa2","stringa3","stringa4","stringa5","stringa6","stringa7","stringa8","stringa9"))
+print(type(y))
+
+print(x[0])  #stampa il primo elemento della lista
+print(x[len(x)-1])  #stampa l'ultimo elemento della lista
+
+z = ["s1","s2","s3","s4","s5","s6","s7","s8","s9"] 
+
+x.extend(z)  #extend aggiunge alla lista x gli elementi della lista z
+
+x.append("stringa")  #append aggiunge un elemento in fondo alla lista x
+
+x.insert(0, "stringa")  #insert aggiunge un elemento nella posizione specificata
+
+x.remove("stringa")  #elimina l'elemento specificato dalla lista
+
+del x[0]  #elimina l'elemento nella posizione specificata
+
+del x #elimina la variabile x
+
+y.clear()  #elimina gli elementi dalla lista
+print(y)  #stampa [] 
+
+for stringa in z:  
+    print(stringa)   #stampa tutti gli elementi della lista
+
+z.sort()  #sort ordina gli elementi della lista
+
+z.sort(reverse=True) #inverte l'ordine degli elementi della lista
+
+
+
+
+
+
+
