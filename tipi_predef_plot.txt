@@ -1,0 +1,5 @@
+from matplotlib import pyplot as graf  
+
+#stampa i principali tipi predefiniti di grafici della libreria di python 
+print(graf.style.available)  
+

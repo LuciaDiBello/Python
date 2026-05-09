@@ -1,0 +1,13 @@
+from matplotlib import pyplot as graf  #libreria di python per la visualizzazione dei grafici
+
+#definisco le liste per rappresentare le coordinate x e y del grafico
+x = [1,2,3,4,5,6,7,8,9]
+y = [90,91,92,93,94,95,96,97,98]
+
+graf.plot(x,y)  #crea il grafico
+
+graf.title("titolo del grafico")  #aggiunge un titolo al grafico
+graf.xlabel("etichetta asse x")   #aggiunge le etichette per gli assi cartesiani
+graf.ylabel("etichetta asse y")
+
+graf.show()  #visualizza un grafico lineare

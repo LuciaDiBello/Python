@@ -1,0 +1,15 @@
+from matplotlib import pyplot as graf  #libreria di python per la visualizzazione dei grafici
+
+#definisco le liste con i dati da rappresentare
+x = [1,2,3,4,5,6,7,8,9]
+y = [0,1,2,3,4,5,6,7,8]
+z = [9,8,7,6,5,4,3,2,1]
+
+graf.plot(x,y,label="etichetta grafico y") #rappresenta più linee sullo stesso grafico con la legenda 
+graf.plot(x,z,label="etichetta grafico z")
+
+graf.title("titolo del grafico")
+graf.xlabel("etichetta asse x")
+graf.ylabel("etichetta asse y")
+
+graf.show()  #visualizza il grafico con le rette

@@ -1,0 +1,19 @@
+from matplotlib import pyplot as graf  #libreria di python per la visualizzazione dei grafici
+
+#definisco le liste con i dati da rappresentare
+x = [1,2,3,4,5,6,7,8,9]
+y = [0,1,2,3,4,5,6,7,8]
+z = [9,8,7,6,5,4,3,2,1]
+
+graf.plot(x,y, linewidth=9, linestyle="--") #è possibile impostare lo stile della linea
+graf.plot(x,z, linestyle="dotted")
+
+graf.title("titolo del grafico")
+graf.xlabel("etichetta asse x")
+graf.ylabel("etichetta asse y")
+
+#la funzione legend permette di indicare la legenda
+graf.legend(["legenda grafico y", "legenda grafico z"]) 
+
+graf.grid()  #è possibile visualizzare una griglia sul grafico
+graf.show()  
