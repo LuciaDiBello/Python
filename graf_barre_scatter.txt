@@ -1,0 +1,17 @@
+from matplotlib import pyplot as graf  #libreria di python per la visualizzazione dei grafici
+
+#definisco le liste con i dati da rappresentare
+x = [1,2,3,4,5,6,7,8,9]
+y = [7,9,5,8,3,4,6,1,2]
+
+graf.bar(x,y) #la funzione bar permette di rappresentare un grafico a barre
+#graf.scatter(x,y)  #la funzione scatter permette di rappresentare un grafico a dispersione
+
+graf.title("titolo del grafico")
+graf.xlabel("etichetta asse x")
+graf.ylabel("etichetta asse y")
+
+#la funzione legend permette di indicare la legenda
+graf.legend(["legenda grafico y", "legenda grafico z"]) 
+
+graf.show() 

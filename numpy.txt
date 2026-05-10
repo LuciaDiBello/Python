@@ -1,0 +1,29 @@
+import numpy as np  
+
+x = np.array([1,2,3,4,5,6,7,8,9])  #la funzione array di numpy permette di creare un array
+print(x) #stampa l'array
+
+print(x+9) #numpy permette di eseguire i calcoli sugli array più velocemente rispetto al tipo di dato list, è utile per il machine learning dove si elaborano matrici di dati
+
+s = np.array(9) #permette di creare un valore scalare, (array di dimensione 0)
+
+
+m = np.array([[1,2,3,4,5,6,7,8,9],
+              [1,2,3,4,5,6,7,8,9]]) #permette di creare una matrice
+
+arr = np.array([[[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]], 
+                [[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9]]]) #permette di creare un array multidimensionale
+
+dim = 9
+z = np.zeros(dim)  #crea un vettore con tutti zeri
+
+print(x.dtype) #stampa il tipo di dato dell'array, intero
+
+x = np.array([1,2,3,4,5,6,7,8,9], dtype='S') #permette di definire il tipo di dato per l'array come stringa
+
+for s in x:  #stampa l'array
+   print(s)
+
+for x in m:   #stampa la matrice
+  for y in x:
+     print(y)
