@@ -1,0 +1,39 @@
+import torch  #libreria per la creazione di reti neurali
+
+#La funzione tensor di torch permette di trasformare una lista di dati in un tensore
+#Per applicare le funzioni di torch che permettono di creare un modello di rete neurale lineare occorre modificare la forma del tensore in forma di tabella, la funzione torch.unsqueeze(x, dim) permette di aggiungere una dimensione al tensore per adattarsi ai parametri del modello lineare, inoltre occorre definire il tensore di tipo float per poter applicare correttamente le funzioni di ottimizzazione dei parametri
+x = torch.tensor([1,2,3,4,5,6,7,8,9], dtype=torch.float32).unsqueeze(1)
+
+y = torch.tensor([1,2,3,4,5,6,7,8,9], dtype=torch.float32).unsqueeze(1)
+
+x.shape  #stampa le dimensioni del tensore
+x[0][0]  #stampa il primo elemento del tensore
+
+from matplotlib import pyplot  
+ 
+pyplot.scatter(x,y)  #si può osservare dal grafico che i dati di riferimento hanno un andamento lineare
+
+#Si usa la funzione Linear della libreria neuralnetwork di torch per creare un modello lineare che meglio può approssimare i dati di riferimento, si indica la quantità dei tensori x, y
+#torch.manual_seed(42) #parametri iniziali generati casualmente con dato di default
+
+model = torch.nn.Linear(1,1)  #modello lineare
+
+fn_errore = torch.nn.MSELoss()  #funzione che determina l'errore medio tra i risultati corretti e i dati previsti
+
+ottimizzatore = torch.optim.Adam(model.parameters(), lr=0.01)  #algoritmo che modifica i parametri della funzione per minimizzare l'errore, lr è la velocità di apprendimento
+
+model(x)  #il modello prevede il risultato con i parametri iniziali casuali
+
+#iterazione per l'addestramento
+for z in range(1000):
+   ottimizzatore.zero_grad()  #si annullano i gradienti ad ogni iterazione per non accumularli
+   y_prev = model(x)  # il modello prevede i risultati ad ogni iterazione
+   errore = fn_errore(y_prev, y)  # si confrontano i dati previsti con i dati corretti
+   errore.backward()  # si calcolano i gradienti dell'errore rispetto ai parametri
+   ottimizzatore.step()  #si modificano i parametri
+   if z % 100 == 0:
+       print(errore) #stampa l'errore per verificare se diminuisce durante l'addestramento
+   pyplot.plot(x, y_prev.detach()) #disegna le linee che si approssimano ai risultati attesi
+
+
+
