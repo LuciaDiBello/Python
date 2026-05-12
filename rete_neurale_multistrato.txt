@@ -1,0 +1,50 @@
+import torch
+from matplotlib import pyplot 
+
+#dati di riferimento
+x = torch.linspace(-9, 9, 1000).unsqueeze(1)  #si produce un tensore con valori equidistanti tra -9 a +9
+y = 1 / (1 + torch.exp(-x))  # funzione curvilinea, sigmoide
+
+pyplot.scatter(x,y)  #dal grafico si osserva che i dati di riferimento seguono l'andamento di una sigmoide
+
+#Si crea un modello che meglio approssima i dati di riferimento
+
+#Per simulare un andamento curvilineo non è sufficiente un solo neurone come nel codice 
+#precedente ma occorre creare una rete neurale multistrato più complessa. 
+#I dati vengono inizialmente elaborati da molti neuroni, poi si usa la funzione torch.nn.Tanh per filtrare i risultati previsti limitandoli tra -1 e 1, 
+#si prosegue con un’altra elaborazione dei dati per poi filtrare di nuovo, 
+#infine i risultati previsti da tutti i neuroni si elaborano in un risultato finale
+model = torch.nn.Sequential(
+    torch.nn.Linear(1, 19),  #gli stessi dati sono elaborati da 19 neuroni 
+    torch.nn.Tanh(),  #filtro sui risultati
+    torch.nn.Linear(19, 19),   #successiva elaborazione dei dati, altro strato della rete neurale
+    torch.nn.Tanh(),  #filtro sui risultati
+    torch.nn.Linear(19, 1)  #i risultati previsti da tutti i neuroni sono sintetizzati in un unico dato finale
+)
+
+fn_errore = torch.nn.MSELoss()   #la funzione MSELoss determina l'errore medio tra i risultati corretti e i dati previsti
+#algoritmo che modifica i parametri della funzione per minimizzare l'errore, lr è la velocità di apprendimento
+ottimizzatore = torch.optim.Adam(model.parameters(), lr=0.01)  
+
+#iterazione per l'addestramento
+for z in range(1000):
+    ottimizzatore.zero_grad()
+    y_pred = model(x)    # il modello prevede i risultati ad ogni iterazione
+    errore = fn_errore(y_pred, y)  # si confrontano i dati previsti con i dati corretti per calcolare l'errore
+    errore.backward()  # si calcolano i gradienti dell'errore rispetto ai parametri
+    ottimizzatore.step()  #si modificano i parametri
+    if z % 100 == 0:
+            print(errore)   #stampa l'errore per verificare se diminuisce durante l'addestramento
+    pyplot.plot(x, y_pred.detach())  #disegna le curve che si approssimano ai risultati attesi    
+
+with torch.no_grad():
+     y_pred = model(x)  #completato l'addestramento si usa la rete neurale per prevedere il risultato
+
+pyplot.figure(figsize=(6,5))  #la funzione pyplot.figure predispone un'area per confrontare il risultato corretto con quello previsto dalla rete neurale
+pyplot.plot(x, y, label="Risultato corretto")
+pyplot.plot(x, y_pred, label="Rete neurale", linestyle="--")
+pyplot.legend()
+pyplot.title("Approssimazione di una sigmoide con rete neurale")
+pyplot.show()
+
+
