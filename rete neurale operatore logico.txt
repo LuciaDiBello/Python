@@ -1,0 +1,62 @@
+#La funzione sigmoide è utilizzata per calcolare la probabilità che il risultato
+#prodotto da una rete neurale sia corretto.
+
+import torch
+
+#Creiamo una rete neurale per simulare il calcolo di un operatore LOGICO.
+
+#Inizializziamo i tensori con i dati della tabella dello xor.
+#La funzione xor non ha un andamento lineare, si può utilizzare una funzione ReLu
+#di attivazione per introdurre la non linearità nel modello
+
+X = torch.tensor([
+    [0.0, 0.0],
+    [0.0, 1.0],
+    [1.0, 0.0],
+    [1.0, 1.0]
+])
+
+
+y = torch.tensor([
+    [0.0],
+    [1.0],
+    [1.0],
+    [0.0]
+])
+
+
+#La funzione nn.Sequential  crea un modello composto da una sequenza di strati
+model = torch.nn.Sequential(
+        torch.nn.Linear(2, 9),  #i dati sono elaborati da 9 neuroni
+        torch.nn.ReLU(),    #funzione di attivazione di non linearità, filtro sui risultati, calcola il max(0,x)
+        torch.nn.Linear(9, 1),   #i risultati previsti da tutti i neuroni sono sintetizzati in un unico dato finale
+        torch.nn.Sigmoid() #si ottiene un risultato interpretato come probabilità
+)
+
+fn_errore = torch.nn.MSELoss()   #la funzione MSELoss determina l'errore medio tra i risultati corretti e i dati previsti
+
+ottimizzatore = torch.optim.Adam(model.parameters(), lr=0.01)  #algoritmo che modifica i parametri della funzione per minimizzare l'errore, lr è la velocità di apprendimento
+
+#iterazione per l'addestramento
+for z in range(10000):
+    ottimizzatore.zero_grad()
+    y_prev = model(X)    # il modello prevede i risultati ad ogni iterazione
+    errore = fn_errore(y_prev, y)  # si confrontano i dati previsti con i dati corretti per calcolare l'errore
+    errore.backward()  # si calcolano i gradienti dell'errore rispetto ai parametri
+    ottimizzatore.step()  #si modificano i parametri
+    if z % 100 == 0:
+            print(errore)  #stampa l'errore
+
+
+with torch.no_grad():
+     y_pred = model(X)   #risultato calcolato dal modello
+
+print(y_prev)
+
+#Stampa
+#[0.00007],
+#[0.99998],
+#[0.99998],
+#[0.00008]
+
+
